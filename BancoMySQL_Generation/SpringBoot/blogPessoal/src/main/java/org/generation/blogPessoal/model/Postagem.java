@@ -18,26 +18,30 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "postagem")
 public class Postagem {
-	
-	@Id	
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
 	@Size(min = 5, max = 100)
 	private String titulo;
-	
+
 	@NotNull
 	@Size(min = 10, max = 500)
-	private String texto;	
+	private String texto;
 
 	@Temporal(TemporalType.TIMESTAMP)
-    private Date data = new java.sql.Date(System.currentTimeMillis());
-	
+	private Date data = new java.sql.Date(System.currentTimeMillis());
+
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
-	
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema usuario;
+
 	public long getId() {
 		return id;
 	}
@@ -62,12 +66,19 @@ public class Postagem {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
+
 	public Tema getTema() {
 		return tema;
 	}
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
-	
+
+	public Tema getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Tema usuario) {
+		this.usuario = usuario;
+	}
+
 }
